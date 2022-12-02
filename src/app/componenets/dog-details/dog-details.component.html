@@ -1,0 +1,27 @@
+<div class="detail-section">
+  <div class="container-fluid">
+    <img src="{{dog.image}}" style="width: 30%">
+    <h3>{{dog.name}}</h3>
+    <div *ngIf="dog.price != 0">{{dog.price | currency :'USD'}}</div>
+    <hr>
+    <table class="table table-responsive-xl table-bordered table-stripped table-hover">
+      <tr>
+        <td style="padding: 20px">color</td>
+        <td style="padding: 20px">{{dog.color}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 20px">weight</td>
+        <td style="padding: 20px">{{dog.weight}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 20px"> age</td>
+        <td style="padding: 20px">{{dog.age}}</td>
+      </tr>
+    </table>
+    <hr>
+    <h4>Description</h4>
+    <p>{{dog.description}}</p>
+    <hr>
+    <a routerLink="/dogs">return to the main</a>
+  </div>
+</div>

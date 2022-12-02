@@ -1,0 +1,117 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <h1>manage Dogs</h1>
+      <a routerLink="/dogs/add">add new Dog</a>
+      <div>
+        <table class="table table-responsive-xl table-bordered table-stripped table-hover">
+          <thead class="thead-dark">
+          <th>
+            #
+            <!--        <a class="text-white" th:if="${sortField != 'id'}" th:href="@{'/categories/page/' + ${pageNum} +'?sortField=id&dir=asc' + '&key='}">-->
+            <!--          #-->
+            <!--        </a>-->
+            <!--        <a class="text-white" th:if="${sortField == 'id'}"-->
+            <!--           th:href="@{'/categories/page/' + ${pageNum} +'?sortField=id&dir=' + ${dir == 'asc' ? 'desc' : 'asc'} + '&key='}">-->
+            <!--          #-->
+            <!--        </a>-->
+            <!--        <span th:if="${sortField == 'id'}" th:class="${dir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>-->
+          </th>
+          <th>Image</th>
+          <th>
+            Name
+            <!--        <a class="text-white" th:if="${sortField != 'name'}" th:href="@{'/categories/page/' + ${pageNum} +'?sortField=name&dir=asc' + '&key='}">-->
+            <!--          Category Name-->
+            <!--        </a>-->
+            <!--        <a class="text-white" th:if="${sortField == 'name'}"-->
+            <!--           th:href="@{'/categories/page/' + ${pageNum} +'?sortField=name&dir=' + ${dir == 'asc' ? 'desc' : 'asc'} + '&key='}">-->
+            <!--          Category Name-->
+            <!--        </a>-->
+            <!--        <span th:if="${sortField == 'name'}" th:class="${dir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>-->
+          </th>
+          <th>
+            category name
+            <!--        <a class="text-white" th:if="${sortField != 'alias'}" th:href="@{'/categories/page/' + ${pageNum} +'?sortField=alias&dir=asc' + '&key='}">-->
+            <!--          Alias-->
+            <!--        </a>-->
+            <!--        <a class="text-white" th:if="${sortField == 'alias'}"-->
+            <!--           th:href="@{'/categories/page/' + ${pageNum} +'?sortField=alias&dir=' + ${dir == 'asc' ? 'desc' : 'asc'} + '&key='}">-->
+            <!--          Alias-->
+            <!--        </a>-->
+            <!--        <span th:if="${sortField == 'alias'}" th:class="${dir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>-->
+          </th>
+          <th>age</th>
+          <th>Action</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let dog of dogs">
+            <td>{{dog.id}}</td>
+            <td>
+              <!--          <i class="fa-solid fa-image-portrait fa-3x" th:if="${category.image == null}"></i>-->
+              <!--          <img th:src="@{${category.getMainImagePath}}" th:if="${category.image != null}" class="image-fluid"-->
+              <!--               style="height: 100px; width: 100px;"-->
+              <!--          >-->
+              <img height="200" src="{{dog.image}}" width="200">
+            </td>
+            <td><a routerLink="/detail/{{dog.id}}">{{dog.name}}</a></td>
+            <td>{{mp.get(dog.categoryID)}}</td>
+            <td>
+              <!--          <a th:href="@{/categories/updateStatus/{id}(id=${category.id})}">-->
+              <!--            <i class="fa-solid fa-check fa-2x" th:if="${category.enabled == true}"></i>-->
+              <!--          </a>-->
+              <!--          <a th:href="@{/categories/updateStatus/{id}(id=${category.id})}">-->
+              <!--            <i class="fa-solid fa-circle-xmark fa-2x" th:if="${category.enabled == false}"></i>-->
+              <!--          </a>-->
+              {{dog.age}}
+
+            </td>
+            <td>
+              <!--          <a th:href="@{/categories/edit/{id}(id=${category.id})}" title="edit this category"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>-->
+              <!--          &nbsp; &nbsp; &nbsp;-->
+              <!--          <a th:href="@{/categories/delete/{id}(id=${category.id})}" title="delete this category" th:if="${category.hasChildren == false}"><i class="fa-sharp fa-solid fa-trash fa-2x"></i></a>-->
+              <!--        </td>-->
+              <div style="display: flex; flex-direction: row; justify-content: space-between; height: 100%">
+                <a (click)="delete(dog.id)" href=""><i aria-hidden="true" class="fa fa-trash fa-4x"></i></a>
+                <a href="" routerLink="/update/{{dog.id}}"><i class="fa fa-regular fa-pencil fa-4x"></i></a>
+              </div>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="dogs.length == 0" class="alert alert-warning col-md-12">
+        No Dog found
+      </div>
+    </div>
+    <div class="footer-pagination">
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-9" style="padding-left: 30%">
+              <ngb-pagination (pageChange)="changePage()"
+                              [(page)]="pageNumber"
+                              [boundaryLinks]="true"
+                              [collectionSize]="totalElements"
+                              [maxSize]="5"
+                              [pageSize]="pageSize"
+
+              ></ngb-pagination>
+
+            </div>
+            <div class="col-md-3 mt-2">
+              <span> page size </span>
+              <select #pageSelected (change)="changeSize(pageSelected.value)">
+                <option selected>2</option>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

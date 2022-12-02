@@ -1,0 +1,170 @@
+<div class="main-content page-m">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <form (ngSubmit)="onSubmit()" [formGroup]="checkForm" method="post">
+        <div class="form-area" formGroupName="dog">
+          <h3>dog information</h3>
+          <div class="row">
+            <div class="col-md-2">
+              <label>Name</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input [ngModel]="dog?.name" formControlName="name" type="text">
+              </div>
+              <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+                <div *ngIf="name?.errors?.['required'] || name?.errors?.['noWhiteSpace']">
+                  Name required
+                </div>
+                <div *ngIf="name?.errors?.['minlength']">
+                  Name has 2 character minimum
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>color</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input [ngModel]="dog?.color" formControlName="color" type="color">
+                <div *ngIf="color?.invalid && (color?.dirty || color?.touched)" class="alert alert-danger">
+                  <div *ngIf="name?.errors?.['required']">
+                    color required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>gender</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input [ngModel]="dog?.gender" formControlName="gender" name="gender" type="radio" value="F">Female
+                <input [ngModel]="dog?.gender" formControlName="gender" name="gender" type="radio" value="M">Male
+                <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+                  <div *ngIf="gender?.errors?.['required']">
+                    gender required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--          <div class="row">-->
+          <!--            <div class="col-md-2">-->
+          <!--              <label>price</label>-->
+          <!--            </div>-->
+          <!--            <div class="col-md-9">-->
+          <!--              <div class="input-space">-->
+          <!--                <input type="number" formControlName="price" [ngModel]="dog?.price">-->
+          <!--                <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="alert alert-danger">-->
+          <!--                  <div *ngIf="price?.errors?.['required']">-->
+          <!--                    price required-->
+          <!--                  </div>-->
+          <!--                  <div *ngIf="name?.errors?.['min']">-->
+          <!--                    at least 1-->
+          <!--                  </div>-->
+          <!--                </div>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <div class="row">
+            <div class="col-md-2">
+              <label>weight</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input [ngModel]="dog?.weight" formControlName="weight" type="number">
+                <div *ngIf="weight?.invalid && (weight?.dirty || weight?.touched)" class="alert alert-danger">
+                  <div *ngIf="weight?.errors?.['required']">
+                    weight required
+                  </div>
+                  <div *ngIf="weight?.errors?.['min']">
+                    at least 1
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>image</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input [ngModel]="dog?.image" [src]="dog?.image" formControlName="image" type="file">
+                <div *ngIf="image?.invalid && (image?.dirty || image?.touched)" class="alert alert-danger">
+                  <div *ngIf="image?.errors?.['required']">
+                    image required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>age</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input [ngModel]="dog?.age" formControlName="age" type="number">
+                <div *ngIf="age?.invalid && (age?.dirty || age?.touched)" class="alert alert-danger">
+                  <div *ngIf="age?.errors?.['required']">
+                    age required
+                  </div>
+                  <div *ngIf="name?.errors?.['min']">
+                    at least 1 year
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>category</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select [ngModel]="dog?.categoryID" formControlName="category">
+                  <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.name}}</option>
+                </select>
+                <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="alert alert-danger">
+                  <div *ngIf="category?.errors?.['required']">
+                    category required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>description</label>
+            </div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <textarea [ngModel]="dog?.description" class="text-area" formControlName="description"
+                          placeholder="required">
+                </textarea>
+                <div *ngIf="description?.invalid && (description?.dirty || description?.touched)"
+                     class="alert alert-danger">
+                  <div *ngIf="description?.errors?.['required'] || description?.errors?.['noWhiteSpace']">
+                    description required
+                  </div>
+                  <div *ngIf="description?.errors?.['minlength']">
+                    description has 10 character minimum
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <input class="btn btn-primary" type="submit" value="purchase">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
